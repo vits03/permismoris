@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /$
+Allow: /index.html
+Allow: /practice/
+Allow: /results/
+Disallow: /mock/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /*?*
+Sitemap: https://www.permismoris.com/sitemap.xml

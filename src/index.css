@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Turret+Road:wght@200;300;400;500;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: Arial, sans-serif;
+  
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body{
+  font-family: "Lexend Deca", sans-serif;
+}                         
+
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+   color: white;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.btn{
+  color:orangered;
+
+}
+
+.btn:hover {
+  color:white;
+}
+
+
+.gradient {
+  background: rgb(255,68,68);
+background: linear-gradient(90deg, rgba(255,68,68,1) 11%, rgba(55,55,249,1) 43%, rgba(255,226,57,1) 72%, rgba(84,247,86,1) 97%);
+}
+
+input[type="radio"] {
+  /* ...existing styles */
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 100%;
+
+
+}
+
+
+.input-parent::before {
+  content: "Correct Answer";
+  position: absolute;
+  top: -12px; /* Half outside the border */
+  left: 10px;
+  background: #4CAF50;
+  color: white;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.right-answer::after {
+  content: "✓ Correct";
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  background: #4CAF50;
+  color: white;
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.wrong-answer::after {
+  content: " ✖ wrong ";
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  background: rgb(238, 30, 30);
+  color: white;
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+body {
+  position: relative;
+  min-height: 100vh;
+  min-height: -webkit-fill-available; /* For mobile browsers */
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.65;
+  background-image: url("/assets/images/mobile_bg.webp");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  filter: blur(5px);
+  
+  /* Mobile-specific fixes */
+  height: 100vh;
+  height: -webkit-fill-available;
+  min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  body::before {
+    background-image: url("/assets/images/desktop_bg.webp");
+    filter: blur(8px);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.turret-road-bold {
+  font-family: "Turret Road", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+
