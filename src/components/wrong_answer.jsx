@@ -4,7 +4,7 @@ const WrongAnswer = ({questionIndex,handleNextQuestion,drivingTestQuestions,inde
    
       return (
         <div className={` w-9/10 py-3 ${nextBtn? "border-0" :" border-red-700 border-3 wrong-answer relative  "} px-2  rounded-4xl  flex flex-col justify-center items-center text-xl mt-3 gap-3 `}>
-          <div className="mt-1 text-2xl font-semibold text-gray-800 text-center">
+          <div className="mt-1 text-lg font-semibold text-gray-800 text-center">
             {" "}
             {!nextBtn ?<h3  className="text-lg font-semibold mb-4">Question {index+1}</h3>:""}
             <p>{drivingTestQuestions[questionIndex].questionTitle}</p>
@@ -66,7 +66,7 @@ const WrongAnswer = ({questionIndex,handleNextQuestion,drivingTestQuestions,inde
 
           </div>
           {nextBtn &&  <button
-                className="bg-amber-700 md:w-5/10 w-7/10 py-3 mt-3 rounded-4xl"
+                className="bg-amber-700 md:w-5/10 w-6/10 py-3 text-lg mt-3 rounded-4xl"
                 onClick={handleNextQuestion}
               >
                 Next

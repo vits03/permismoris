@@ -5,7 +5,7 @@ const RandomizeList = (questionListLength,finalListLength) => {
 
   // Fisher-Yates shuffle algorithm to shuffle the indices
   for (let i = indices.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(Math.random() * (i ));
     [indices[i], indices[j]] = [indices[j], indices[i]];
   }
  // Return the shuffled indices array

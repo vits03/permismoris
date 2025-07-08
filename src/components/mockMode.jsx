@@ -138,9 +138,9 @@ const handleNextQuestion = ()=>{
 
       {questionsIndex && questionsIndex.length > 0 ? (
         <section className="min-h-[calc(100vh-90px)] flex justify-center flex-col items-center">
-          <div className="flex w-95/100 flex-col items-center rounded-3xl md:max-w-2xl text-black bg-white py-5   ">
+          <div className="flex w-95/100 flex-col items-center rounded-3xl md:max-w-2xl text-black bg-white py-2   ">
             <div className="w-full flex-col text-center justify-center flex items-center text-2xl border-b-2">
-              <h3 className="section-header text-2xl font-semibold text-gray-700">
+              <h3 className="section-header text-lg font-semibold text-gray-700">
                 Question {questionNo + 1}
               </h3>
               <ProgressBar questionNo={questionNo + 1} totalQuestions={MOCK_QUESTIONS} />
@@ -156,7 +156,7 @@ const handleNextQuestion = ()=>{
                 onStart={onStart}
                 setTimerOver={setTimerOver}
               />
-              <div className="mt-1 text-2xl font-semibold text-center text-gray-800">
+              <div className="mt-1 text-lg font-semibold text-center text-gray-800">
                 {drivingTestQuestions[questionsIndex[questionNo]]?.questionTitle || "No questions"}
               </div>
               <div>
@@ -206,7 +206,7 @@ const handleNextQuestion = ()=>{
               </div>
               
               <button 
-                className="bg-amber-700 md:w-5/10 w-7/10 py-3 mt-3 rounded-4xl hover:bg-amber-600 transition duration-200" 
+                className="bg-amber-700 md:w-5/10 w-6/10 text-lg py-3 mt-3 rounded-4xl hover:bg-amber-600 transition duration-200" 
                 onClick={handleNextQuestion}
               >
                 Next

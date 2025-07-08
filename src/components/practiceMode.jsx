@@ -60,7 +60,7 @@ const PracticeMode = ({
     }));
   }, [questionNo]);
 
-  useEffect(()=>{
+  useEffect(()=>{ 
        if (vehicle == "car")
         {
           setDrivingTestQuestions(drivingTestQuestionsCar);
@@ -73,10 +73,14 @@ const PracticeMode = ({
         }
    restartQuiz()
    
-    switchMode("practice");
+    switchMode("practice",type);
    handleReset()
 
   },[])
+
+  useEffect(()=>{
+    console.log(questionsIndex)
+  },[questionsIndex])
 
   const handleOptionChange = (questionNumber, optionKey) => {
     setSelectedOptions((prev) => ({
@@ -107,9 +111,9 @@ const PracticeMode = ({
     <>
    {questionsIndex && questionsIndex.length > 0 ? (
     <section  className="min-h-[calc(100vh-90px)] flex justify-center flex-col  items-center  ">
-      <div className="flex w-95/100 flex-col items-center  rounded-3xl md:max-w-2xl text-black bg-white py-5 ">
+      <div className="flex w-95/100 flex-col items-center  rounded-3xl md:max-w-2xl text-black bg-white py-2 ">
         <div className=" w-full flex-col        text-center justify-center flex items-center text-2xl border-b-2 ">
-          <h3 className="section-header text-2xl font-semibold text-gray-700   ">
+          <h3 className="section-header text-xl font-semibold text-gray-700   ">
             Question {questionNo + 1}
           </h3>
           <ProgressBar questionNo={questionNo + 1} totalQuestions={PRACTICE_QUESTIONS} />
@@ -130,7 +134,7 @@ const PracticeMode = ({
           )
         ) : (
           <div className="w-9/10 flex flex-col justify-center items-center text-xl mt-3 gap-3 ">
-            <div className="mt-1 text-2xl text-center font-semibold text-gray-800">
+            <div className="mt-1 text-lg text-center font-semibold text-gray-800">
               <p>
                 {drivingTestQuestions[questionsIndex[questionNo]].questionTitle}
               </p>
@@ -144,7 +148,7 @@ const PracticeMode = ({
               decoding="async"
 
               className="md:w-60 w-35 h-auto" 
-            /> : <div className="h-10"></div>}
+            /> : <div className="h-7"></div>}
             {/* Preload the next image invisibly */}
 {drivingTestQuestions[questionsIndex[questionNo + 1]]?.imageLink && (
   <img
@@ -210,7 +214,7 @@ const PracticeMode = ({
             </div>
 
             <button
-              className="bg-amber-700 md:w-5/10 w-7/10 py-3 mt-3 rounded-4xl"
+              className="bg-amber-700 md:w-5/10 w-6/10 text-lg py-3 mt-3 rounded-4xl"
               onClick={handleShowAnswer}
             >
               Check Answer

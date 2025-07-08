@@ -16,17 +16,17 @@ const HeroSection = ({ switchMode,restartQuiz }) => {
   };
   return (
     <>
-    <div className="h-[calc(100vh-72px)] min-h-110">
+    <div className="h-[calc(100vh-72px)] min-h-110 mt-5">
       <div className="h-97/100  px-4 text-[#FFFFFF] justify-evenly items-center flex flex-col">
         
-          <h1 className="text-center opacity-100  text-amber-50 font-semibold">
+          <h1 className="text-center opacity-100 md:text-3xl text-amber-50 font-semibold">
             Practice Oral Learners Test MCQs
           </h1>
-          <h2 className="text-center text-xl font-semibold mt-3">
+          <h2 className="text-center text-lg font-medium mt-3">
             Free  Oral driving tests with real exam questions for Learner Drivers
           </h2>
         
-        <div className=" text-xl">
+        <div className=" text-lg font-medium">
           <p>✅Real exams questions</p>
           <p className="mt-4">✅Instant feedback</p>
           <p className="mt-4">✅Timed Mock Tests</p>
@@ -41,11 +41,11 @@ const HeroSection = ({ switchMode,restartQuiz }) => {
       </div>
       
       <section ref={nextSectionRef} 
-         className="w-full h-screen min-h-180 flex  justify-center items-center ">
+         className="w-full min-h-screen flex  justify-center items-center ">
         <div className="flex bg-white   gap-5 w-95/100 lg:w-9/10 max-w-4xl  mx-auto h-80/100 py-5 md:h-7/10 rounded-3xl flex-col items-center justify-evenly   md:pb-15 px-3">
-          <h3 className="text-4xl text-amber-700     ">Features</h3>
-          <div className="features-container rounded-3xl h-95/10 gap-3 border-2 justify-evenly w-full items-center flex flex-col  md:flex-row ">
-            <div className="md:w-3/10 w-95/100 h-45/100 md:h-8/10 text-black bg-green-100 text-center  gap-3 py-3  md:py-8 rounded-4xl flex flex-col justify-evenly items-center border-green-700 border-2">
+          <h3 className="text-3xl text-amber-700     ">Features</h3>
+          <div className="features-container rounded-3xl  gap-8 border-2 justify-evenly w-full items-center flex flex-col  md:flex-row ">
+            <div className="md:w-3/10 w-95/100  md:h-8/10 text-black bg-green-100 text-center  gap-3 py-3  md:py-8 rounded-4xl flex flex-col justify-evenly items-center border-green-700 border-2">
               <p className="text-lg text-green-700">Practice Mode</p>
 
               <div className="text-left  text-sm flex flex-col justify-evenly  gap-4 h-6/10 pl-2">
@@ -64,16 +64,16 @@ const HeroSection = ({ switchMode,restartQuiz }) => {
                   questions{" "}
                 </p>
               </div>
-              <button  onClick={()=>handleClick("practice","car")} className="px-4 py-2 bg-green-700 w-5/10 rounded-full hover:bg-green-600 transition-all ">
+              <button  onClick={()=>handleClick("practice","car")} className="px-4 py-2 mt-4 bg-green-700 w-8/10 rounded-full hover:bg-green-600 transition-all ">
                 {" "}
                 Car
               </button>
-                <button  onClick={()=>handleClick("practice","bus")} className="px-4 py-2 bg-green-700 w-5/10 rounded-full hover:bg-green-600 transition-all ">
+                <button  onClick={()=>handleClick("practice","bus")} className="px-4 py-2 bg-green-700 w-8/10 rounded-full hover:bg-green-600 transition-all ">
                 {" "}
                  Bus
               </button>
             </div>
-            <div className="md:w-3/10 w-95/100 h-45/100 text-black bg-red-100 text-center  md:h-8/10 py-3 md:py-8  gap-3  rounded-4xl flex flex-col justify-evenly items-center border-amber-700 border-2">
+            <div className="md:w-3/10 w-95/100 min-h-45/100 text-black bg-red-100 text-center  md:h-8/10 py-3 md:py-8  gap-3  rounded-4xl flex flex-col justify-evenly items-center border-amber-700 border-2">
               <p className="text-lg text-amber-700">Mock Mode</p>
 
               <div className="text-left  text-sm flex flex-col gap-4  justify-evenly h-6/10 pl-2">
@@ -93,11 +93,11 @@ const HeroSection = ({ switchMode,restartQuiz }) => {
                   questions{" "}
                 </p>
               </div>
-              <button onClick={()=>handleClick("mock","car")} className=" px-4 py-2 bg-amber-700 w-5/10 rounded-full hover:bg-amber-600 transition-all ">
+              <button onClick={()=>handleClick("mock","car")} className=" px-4 py-2 mt-4  bg-amber-700 w-8/10 rounded-full hover:bg-amber-600 transition-all ">
                 {" "}
                Car
               </button>
-                <button onClick={()=>handleClick("mock","bus")} className=" px-4 py-2 bg-amber-700 w-5/10 rounded-full hover:bg-amber-600 transition-all ">
+                <button onClick={()=>handleClick("mock","bus")} className=" px-4 py-2 bg-amber-700 w-8/10 rounded-full hover:bg-amber-600 transition-all ">
                 {" "}
                 Bus
               </button>

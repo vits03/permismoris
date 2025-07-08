@@ -3,7 +3,7 @@ const RightAnswer = ({ index,questionIndex,handleNextQuestion,drivingTestQuestio
   
   return (
     <div className={`w-9/10 flex flex-col ${nextBtn? "border-0":"relative right-answer border-green-500 border-3"} px-2 py-3  rounded-4xl justify-center items-center text-xl mt-3 gap-3 `}>
-      <div className="mt-1 text-2xl  text-center font-semibold text-gray-800">
+      <div className="mt-1 text-lg text-center font-semibold text-gray-800">
      {!nextBtn ?<h3  className="text-lg font-semibold mb-4">Question {index+1}</h3>:""}
         <p>{drivingTestQuestions[questionIndex].questionTitle}</p>
       </div>
@@ -64,7 +64,7 @@ const RightAnswer = ({ index,questionIndex,handleNextQuestion,drivingTestQuestio
         <p className="text-sm text-green-700 font-bold text-center my-3">Explanation: <span className="text-green-700 font-normal">{drivingTestQuestions[questionIndex].explanation}</span></p>
       </div> 
         {nextBtn &&  <button
-                className="bg-amber-700 md:w-5/10 w-7/10 py-3 mt-3 rounded-4xl"
+                className="bg-amber-700 md:w-5/10 w-6/10 py-3 mt-3 text-lg rounded-4xl"
                 onClick={handleNextQuestion}
               >
                 Next

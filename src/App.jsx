@@ -118,7 +118,7 @@ const switchMode = (newMode,type) => {
   
      <BrowserRouter> 
       <ScrollToTop />
-         <header  className='flex justify-center text-2xl turret-road-bold  cursor-pointer'><div className='py-5 relative text-white '   > <Link to="/">Permis Moris</Link>    <img  className="   -z-1 -top-15 right-0 absolute w-fit h-60"src={flag} alt="" /> </div>  </header>  
+         <header  className='flex justify-center text-xl md:text-2xl turret-road-bold mt-1  md:mt-3 cursor-pointer'><div className='py-3 mb-1 md:py-4 relative text-white '   > <Link to="/">Permis Moris</Link>    <img  className="   -z-1 -top-12 right-0  absolute w-fit h-[10rem]"src={flag} alt="" /> </div>  </header>  
 
  
   <Routes>
