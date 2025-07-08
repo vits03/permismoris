@@ -3,6 +3,8 @@ Allow: /$
 Allow: /index.html
 Allow: /practice/
 Allow: /results/
+Allow: /mock-car
+Allow: /mock-bus
 Disallow: /mock/
 Disallow: /private/
 Disallow: /admin/

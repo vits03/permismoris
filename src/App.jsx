@@ -2,7 +2,8 @@
 import { useState,useEffect} from 'react';
 import Tesseract from 'tesseract.js';
 import './App.css';
- import { drivingTestQuestions } from './components/questions';
+ import { drivingTestQuestionsCar } from './components/questions';
+ import { drivingTestQuestionsBus } from './components/busquestions';
  import HeroSection from './components/hero-section';
  import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -27,6 +28,7 @@ function ScrollToTop() {
 
 function App() {
   const MOCK_QUESTIONS =35;
+
   const PRACTICE_QUESTIONS = 20;
 const [questionNo, setQuestionNo] = useState(0);
 const [time,setTime]=useState(30);
@@ -35,13 +37,30 @@ const [ timerOver,setTimerOver]= useState(false);
 const [mode, setMode] = useState("practice"); // Default value
 const [questionsIndex, setQuestionsIndex] = useState([]);
 const [ userAnswers, setUserAnswers] = useState([]);
-
+const [ drivingTestQuestions, setDrivingTestQuestions] = useState(drivingTestQuestionsCar);
+const [type,setType]= useState("");
 useEffect(() => {
   drivingTestQuestions.forEach(question => {
     const img = new Image();
     img.src = question.imageLink;
   });
 }, []);
+
+useEffect(()=>{
+  if (type === "car")
+    {
+      setDrivingTestQuestions(drivingTestQuestionsCar);
+     
+    }
+    else {
+       setDrivingTestQuestions(drivingTestQuestionsBus);
+
+     
+       
+    }
+},[type])
+
+
 
 // In your route component or main layout
  // Reset scroll when route changes
@@ -65,16 +84,23 @@ const restartQuiz = ()=>{
 
  
 
-const switchMode = (newMode) => {
+const switchMode = (newMode,type) => {
+  let questionsLength;
   if (newMode !== "practice" && newMode !== "mock") {
     console.error("Invalid mode! Only 'practice' or 'test' allowed.");
     return;
   }
-  if (newMode === "practice"){
-    setQuestionsIndex(RandomizeList(drivingTestQuestions.length, PRACTICE_QUESTIONS));
+  if ( type === "car"){
+   questionsLength = drivingTestQuestionsCar.length;
   }
   else {
-    setQuestionsIndex(RandomizeList(drivingTestQuestions.length,MOCK_QUESTIONS));
+    questionsLength = drivingTestQuestionsBus.length;
+  }
+  if (newMode === "practice"){
+    setQuestionsIndex(RandomizeList(questionsLength ,PRACTICE_QUESTIONS));
+  }
+  else {
+    setQuestionsIndex(RandomizeList(questionsLength,MOCK_QUESTIONS));
  
   }
   setMode(newMode);
@@ -97,9 +123,12 @@ const switchMode = (newMode) => {
  
   <Routes>
 
-  <Route path='practice' element={<PracticeMode 
+  <Route path='practice-car' element={<PracticeMode 
   
   PRACTICE_QUESTIONS={PRACTICE_QUESTIONS}
+   vehicle={"car"}
+    type={type}
+    setType={setType}
   restartQuiz={restartQuiz}
   switchMode={switchMode}
   handleReset={handleReset}
@@ -115,9 +144,36 @@ const switchMode = (newMode) => {
   
   
   />}/>
-  <Route path='mock' element={
+
+
+  
+  <Route path='practice-bus' element={<PracticeMode 
+  
+  PRACTICE_QUESTIONS={PRACTICE_QUESTIONS}
+  restartQuiz={restartQuiz}
+  switchMode={switchMode}
+    vehicle={"bus"}
+    type={type}
+    setType={setType}
+  handleReset={handleReset}
+ setQuestionNo={setQuestionNo}
+  questionNo={questionNo}
+  userAnswers={userAnswers}
+  addUserAnswer={addUserAnswer}
+  questionsIndex={questionsIndex}
+  timerOver={timerOver}
+  onStart={() => setReset(true)}
+  setTimerOver={setTimerOver}
+  
+  
+  
+  />}/>
+  <Route path='mock-car' element={
     <MockMode
     MOCK_QUESTIONS={MOCK_QUESTIONS}
+    vehicle={"car"}
+    type={type}
+    setType={setType}
     restartQuiz={restartQuiz}
       time={time}
       setTime={setTime}
@@ -137,7 +193,33 @@ const switchMode = (newMode) => {
       setTimerOver={setTimerOver}
     />
   }/>
-  <Route path='results' element={<FinalResults  restartQuiz={restartQuiz}   questionsIndex={questionsIndex} userAnswers={userAnswers} />}/>
+
+   <Route path='mock-bus' element={
+    <MockMode
+    MOCK_QUESTIONS={MOCK_QUESTIONS}
+  type={type}
+    setType={setType}
+    restartQuiz={restartQuiz}
+      time={time}
+      vehicle={"bus"}
+      setTime={setTime}
+      switchMode={switchMode}
+      questionNo={questionNo}
+      setQuestionNo={setQuestionNo}
+      setQuestionsIndex={setQuestionsIndex}
+      reset={reset}
+      setReset={setReset}
+      handleReset={handleReset}
+      mode={mode}
+      userAnswers={userAnswers}
+      addUserAnswer={addUserAnswer}
+      questionsIndex={questionsIndex}
+      timerOver={timerOver}
+      onStart={() => setReset(true)}
+      setTimerOver={setTimerOver}
+    />
+  }/>
+  <Route path='results' element={<FinalResults  restartQuiz={restartQuiz} drivingTestQuestions={drivingTestQuestions}  questionsIndex={questionsIndex} userAnswers={userAnswers} />}/>
   <Route path='progress' element={<ProgressBar/>}/>
 
 

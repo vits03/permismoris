@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import ProgressBar from "./progressBar";
-import { drivingTestQuestions } from "./questions";
+import { drivingTestQuestionsCar } from "./questions";
 import ReactDOM from "react-dom/client";
 import RightAnswer from "./right_answer";
 import WrongAnswer from "./wrong_answer";
 import { startTransition } from 'react';
-import { useRef } from "react";
-
+import { drivingTestQuestionsBus } from "./busquestions";
 import { BrowserRouter, Routes, useNavigate, Route } from "react-router-dom";
 const PracticeMode = ({
   questionsIndex,
@@ -16,11 +15,17 @@ const PracticeMode = ({
   setQuestionNo,
   setScore,
   switchMode,
+  type,
+  setType,
+  vehicle,
   handleReset,
   restartQuiz,
   PRACTICE_QUESTIONS,
 }) => {
+
   const [selectedOptions, setSelectedOptions] = useState({});
+      const [ drivingTestQuestions,setDrivingTestQuestions] = useState({})
+
   const navigate = useNavigate();
 
 
@@ -56,12 +61,21 @@ const PracticeMode = ({
   }, [questionNo]);
 
   useEffect(()=>{
+       if (vehicle == "car")
+        {
+          setDrivingTestQuestions(drivingTestQuestionsCar);
+          setType("car");
+           console.log(vehicle,type)
+        }
+        else {
+          setDrivingTestQuestions(drivingTestQuestionsBus)
+          setType("bus");
+        }
    restartQuiz()
    
     switchMode("practice");
    handleReset()
 
-   console.log(drivingTestQuestions[0].imageLink)
   },[])
 
   const handleOptionChange = (questionNumber, optionKey) => {
@@ -105,13 +119,14 @@ const PracticeMode = ({
             <RightAnswer
             handleNextQuestion={handleNextQuestion}
             nextBtn={true}
+            drivingTestQuestions={drivingTestQuestions}
               setScore={setScore}
               index={questionNo}
               questionIndex={questionsIndex[questionNo]}
               userAnswer={userAnswers[questionNo]}
             />
           ) : (
-            <WrongAnswer  handleNextQuestion={handleNextQuestion} nextBtn={true}  index={questionNo} questionIndex={questionsIndex[questionNo]} userAnswer={userAnswers[questionNo]} rightAnswer={drivingTestQuestions[questionsIndex[questionNo]].answer}/>
+            <WrongAnswer drivingTestQuestions={drivingTestQuestions} handleNextQuestion={handleNextQuestion} nextBtn={true}  index={questionNo} questionIndex={questionsIndex[questionNo]} userAnswer={userAnswers[questionNo]} rightAnswer={drivingTestQuestions[questionsIndex[questionNo]].answer}/>
           )
         ) : (
           <div className="w-9/10 flex flex-col justify-center items-center text-xl mt-3 gap-3 ">
@@ -132,13 +147,14 @@ const PracticeMode = ({
             /> : <div className="h-10"></div>}
             {/* Preload the next image invisibly */}
 {drivingTestQuestions[questionsIndex[questionNo + 1]]?.imageLink && (
-<img
-src={drivingTestQuestions[questionsIndex[questionNo + 1]]?.imageLink}
-alt=""
-style={{ display: "none" }}
-aria-hidden="true"
-/>
+  <img
+    src={drivingTestQuestions[questionsIndex[questionNo + 1]]?.imageLink}
+    alt=""
+    style={{ display: "none" }}
+    aria-hidden="true"
+  />
 )}
+
             </div>
             <div className="radio-btns mt-2 text-xl  text-gray-700 ">
               {drivingTestQuestions[questionsIndex[questionNo]].questionsAnswers.map(

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { drivingTestQuestions } from "./questions";
 import RightAnswer from "./right_answer";
 import WrongAnswer from "./wrong_answer";
 import { useNavigate } from "react-router-dom";
-const FinalResults = ({ restartQuiz,questionsIndex, userAnswers }) => {
+const FinalResults = ({ restartQuiz,questionsIndex, userAnswers ,drivingTestQuestions}) => {
   let userAnswer;
   let rightAnswer;
 
@@ -11,7 +10,6 @@ const FinalResults = ({ restartQuiz,questionsIndex, userAnswers }) => {
 
   //function that takes an index and checks if user answer is right or not.
   const navigate = useNavigate();
-
 
   //function that takes in the score and the total number of questions . function returns a message based on the user score
 
@@ -54,16 +52,16 @@ const scoreMessage = ()=>{
     navigate('/');
   }
   
-  useEffect(() => {
-    questionsIndex.map((questionIndex, index) => {
-      if (userAnswers[index] === drivingTestQuestions[questionIndex].answer) {
-        setScore((prev) => prev + 1);
-      }
-    });
-  }, []);
+useEffect(() => {
+  // Calculate the total score first
+  const calculatedScore = questionsIndex.reduce((total, questionIndex, index) => {
+    const isCorrect = userAnswers[index] === drivingTestQuestions[questionIndex].answer;
+    return isCorrect ? total + 1 : total;
+  }, 0);
 
-
-
+  // Set the score once with the final calculated value
+  setScore(calculatedScore);
+}, []); // Empty dependency array means this runs once on mount
   const checkAnswer = (index, questionIndex) => {
     if (userAnswers[index] === drivingTestQuestions[questionIndex].answer) {
       userAnswer = drivingTestQuestions[questionIndex].answer;
@@ -98,6 +96,7 @@ const scoreMessage = ()=>{
               index={index}
               questionIndex={questionIndex}
               userAnswer={userAnswer}
+              drivingTestQuestions={drivingTestQuestions}
             />
           );
         } else {
@@ -107,6 +106,7 @@ const scoreMessage = ()=>{
               questionIndex={questionIndex}
               userAnswer={userAnswer}
               rightAnswer={rightAnswer}
+              drivingTestQuestions={drivingTestQuestions}
             />
           );
         }

@@ -3,10 +3,10 @@ import { useRef } from "react";
 
 const HeroSection = ({ switchMode,restartQuiz }) => {
   let navigate = useNavigate();
-  const handleClick = (mode) => {
+  const handleClick = (mode,vehicle) => {
     switchMode(mode);
     restartQuiz();
-    navigate(`/${mode}`);
+    navigate(`/${mode}-${vehicle}`);
   };
 
   const nextSectionRef = useRef(null);
@@ -64,9 +64,13 @@ const HeroSection = ({ switchMode,restartQuiz }) => {
                   questions{" "}
                 </p>
               </div>
-              <button  onClick={()=>handleClick("practice")} className="px-4 py-2 bg-green-700 w-5/10 rounded-full hover:bg-green-600 transition-all ">
+              <button  onClick={()=>handleClick("practice","car")} className="px-4 py-2 bg-green-700 w-5/10 rounded-full hover:bg-green-600 transition-all ">
                 {" "}
-                Start
+                Car
+              </button>
+                <button  onClick={()=>handleClick("practice","bus")} className="px-4 py-2 bg-green-700 w-5/10 rounded-full hover:bg-green-600 transition-all ">
+                {" "}
+                 Bus
               </button>
             </div>
             <div className="md:w-3/10 w-95/100 h-45/100 text-black bg-red-100 text-center  md:h-8/10 py-3 md:py-8  gap-3  rounded-4xl flex flex-col justify-evenly items-center border-amber-700 border-2">
@@ -89,9 +93,13 @@ const HeroSection = ({ switchMode,restartQuiz }) => {
                   questions{" "}
                 </p>
               </div>
-              <button onClick={()=>handleClick("mock")} className=" px-4 py-2 bg-amber-700 w-5/10 rounded-full hover:bg-amber-600 transition-all ">
+              <button onClick={()=>handleClick("mock","car")} className=" px-4 py-2 bg-amber-700 w-5/10 rounded-full hover:bg-amber-600 transition-all ">
                 {" "}
-                Start
+               Car
+              </button>
+                <button onClick={()=>handleClick("mock","bus")} className=" px-4 py-2 bg-amber-700 w-5/10 rounded-full hover:bg-amber-600 transition-all ">
+                {" "}
+                Bus
               </button>
             </div>
           </div>

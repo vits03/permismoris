@@ -1,8 +1,6 @@
-import { drivingTestQuestions } from "./questions";
 
-const WrongAnswer = ({questionIndex,handleNextQuestion,index,userAnswer,rightAnswer,nextBtn=false})=>{
-    console.log(questionIndex);
-    console.log(userAnswer);
+const WrongAnswer = ({questionIndex,handleNextQuestion,drivingTestQuestions,index,userAnswer,rightAnswer,nextBtn=false})=>{
+  
    
       return (
         <div className={` w-9/10 py-3 ${nextBtn? "border-0" :" border-red-700 border-3 wrong-answer relative  "} px-2  rounded-4xl  flex flex-col justify-center items-center text-xl mt-3 gap-3 `}>

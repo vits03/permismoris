@@ -1,5 +1,4 @@
-import { drivingTestQuestions } from "./questions";
-const RightAnswer = ({ index,questionIndex,handleNextQuestion, userAnswer,nextBtn=false }) => {
+const RightAnswer = ({ index,questionIndex,handleNextQuestion,drivingTestQuestions, userAnswer,nextBtn=false }) => {
    
   
   return (

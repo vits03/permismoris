@@ -1,4 +1,5 @@
 const RandomizeList = (questionListLength,finalListLength) => {
+  console.log(questionListLength,finalListLength)
   // Create an array of indices from 0 to list.length - 1
   const indices = Array.from({ length:questionListLength }, (_, i) => i);
 

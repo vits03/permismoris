@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import Timer from "./timer";
 import ProgressBar from "./progressBar";
-import { drivingTestQuestions } from './questions';
+import { drivingTestQuestionsCar } from './questions';
+import { drivingTestQuestionsBus } from "./busquestions";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes,useNavigate, Route } from "react-router-dom";
+import {Helmet} from "react-helmet"
 const MockMode = ({
   time,
   setTime,
   reset,
   setReset,
   timerOver,
+  type,
+  setType,
+  vehicle,
   handleReset,
   questionsIndex,
   onStart,
@@ -23,19 +28,32 @@ const MockMode = ({
   MOCK_QUESTIONS,
 }) => {
     const [selectedOptions, setSelectedOptions] = useState({});
+    const [ drivingTestQuestions,setDrivingTestQuestions] = useState({})
 const navigate = useNavigate();
   ///this component returns the question and has question index , all questions , setQuestionIndex, SetuserSelection,userSelection,userScore,
  
   useEffect(()=>{
+   if (vehicle == "car")
+    {
+      setDrivingTestQuestions(drivingTestQuestionsCar);
+      setType("car");
+       console.log(vehicle,type)
+    }
+    else {
+      setDrivingTestQuestions(drivingTestQuestionsBus)
+      setType("bus");
+    }
+   
 restartQuiz()
-    switchMode("mock");
+    switchMode("mock",type);
    handleReset()
-   
-   
+ 
 
   
   },[])
-
+useEffect(()=>{
+  console.log(questionsIndex)
+},[questionsIndex])
   useEffect(() => {
     if ( questionNo  === MOCK_QUESTIONS){
         alert("game over")
@@ -91,11 +109,33 @@ const handleNextQuestion = ()=>{
    
    
 }
+
+ const commonKeywords = [
+    "oral learner test",
+    "Mauritius driving test",
+  ];
+
+  const vehicleKeywords = type === "car"
+    ? ["car"]
+    : type === "bus"
+    ? ["mechanique", "mechanik", "bus"]
+    : [];
+
+  const seoKeywords = [...commonKeywords, ...vehicleKeywords].join(", ");
+
+  const seoTitle = `Mock ${type.charAt(0).toUpperCase() + type.slice(1)} Driving Test - Mauritius`;
+
   // if timer runs out before user selection , mark as wrong answer and go to next question
   // if timer runs out after user selection but before clikcing on  btn, set answer and go to next question
   // when the user click btn before timer , stop timer, record answer and go to next question.
   return (
     <>
+       <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={`Prepare for your ${type} driving test in Mauritius with our mock tests.`} />
+        <meta name="keywords" content={seoKeywords} />
+      </Helmet>
+
       {questionsIndex && questionsIndex.length > 0 ? (
         <section className="min-h-[calc(100vh-90px)] flex justify-center flex-col items-center">
           <div className="flex w-95/100 flex-col items-center rounded-3xl md:max-w-2xl text-black bg-white py-5   ">
@@ -120,15 +160,19 @@ const handleNextQuestion = ()=>{
                 {drivingTestQuestions[questionsIndex[questionNo]]?.questionTitle || "No questions"}
               </div>
               <div>
-               {   drivingTestQuestions[questionsIndex[questionNo]].imageLink ? <img 
-              
-                  src={drivingTestQuestions[questionsIndex[questionNo]]?.imageLink} 
-                  alt="" 
-                  loading="eager" 
-                  decoding="async"
-
-                  className="md:w-60 w-35 h-auto" 
-                /> : <div className="h-10"></div>}
+               {
+  drivingTestQuestions[questionsIndex[questionNo]]?.imageLink ? (
+    <img 
+      src={drivingTestQuestions[questionsIndex[questionNo]].imageLink} 
+      alt="Question illustration" 
+      loading="eager"
+      decoding="async"
+      className="md:w-60 w-35 h-auto" 
+    />
+  ) : (
+    <div className="h-10"></div>
+  )
+}
                 {/* Preload the next image invisibly */}
 {drivingTestQuestions[questionsIndex[questionNo + 1]]?.imageLink && (
   <img

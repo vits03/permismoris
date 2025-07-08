@@ -1,4 +1,4 @@
-export const drivingTestQuestions = [
+export const drivingTestQuestionsCar = [
     {
       questionTitle: "What does this sign indicate?",
       imageLink: "/assets/images/falling_rocks.jpg",
