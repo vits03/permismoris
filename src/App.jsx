@@ -1,6 +1,5 @@
  
 import { useState,useEffect} from 'react';
-import Tesseract from 'tesseract.js';
 import './App.css';
  import { drivingTestQuestionsCar } from './components/questions';
  import { drivingTestQuestionsBus } from './components/busquestions';

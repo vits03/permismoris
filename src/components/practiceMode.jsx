@@ -47,7 +47,9 @@ const PracticeMode = ({
   // else show wrong answer
   // add a next btn, that puts showAnswer as false and increment quesetion index
 
-
+ useEffect(()=>{
+  console.log(questionsIndex,questionNo)
+ },[questionNo,questionsIndex])
  
   useEffect(() => {
     if (questionNo === PRACTICE_QUESTIONS) {
