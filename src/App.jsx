@@ -3,6 +3,7 @@ import { useState,useEffect} from 'react';
 import './App.css';
  import { drivingTestQuestionsCar } from './components/questions';
  import { drivingTestQuestionsBus } from './components/busquestions';
+ import { drivingTestQuestionsLorry } from './components/lorryquestions';
  import HeroSection from './components/hero-section';
  import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -49,13 +50,12 @@ useEffect(()=>{
   if (type === "car")
     {
       setDrivingTestQuestions(drivingTestQuestionsCar);
-     
     }
-    else {
+  else if (type === "bus") {
        setDrivingTestQuestions(drivingTestQuestionsBus);
-
-     
-       
+    }
+  else if (type === "lorry") {
+       setDrivingTestQuestions(drivingTestQuestionsLorry);
     }
 },[type])
 
@@ -92,8 +92,11 @@ const switchMode = (newMode,type) => {
   if ( type === "car"){
    questionsLength = drivingTestQuestionsCar.length;
   }
-  else {
+  else if (type === "bus") {
     questionsLength = drivingTestQuestionsBus.length;
+  }
+  else if (type === "lorry") {
+    questionsLength = drivingTestQuestionsLorry.length;
   }
   if (newMode === "practice"){
     setQuestionsIndex(RandomizeList(questionsLength ,PRACTICE_QUESTIONS));
@@ -167,6 +170,28 @@ const switchMode = (newMode,type) => {
   
   
   />}/>
+
+  <Route path='practice-lorry' element={<PracticeMode 
+  
+  PRACTICE_QUESTIONS={PRACTICE_QUESTIONS}
+  restartQuiz={restartQuiz}
+  switchMode={switchMode}
+    vehicle={"lorry"}
+    type={type}
+    setType={setType}
+  handleReset={handleReset}
+ setQuestionNo={setQuestionNo}
+  questionNo={questionNo}
+  userAnswers={userAnswers}
+  addUserAnswer={addUserAnswer}
+  questionsIndex={questionsIndex}
+  timerOver={timerOver}
+  onStart={() => setReset(true)}
+  setTimerOver={setTimerOver}
+  
+  
+  
+  />}/>
   <Route path='mock-car' element={
     <MockMode
     MOCK_QUESTIONS={MOCK_QUESTIONS}
@@ -201,6 +226,32 @@ const switchMode = (newMode,type) => {
     restartQuiz={restartQuiz}
       time={time}
       vehicle={"bus"}
+      setTime={setTime}
+      switchMode={switchMode}
+      questionNo={questionNo}
+      setQuestionNo={setQuestionNo}
+      setQuestionsIndex={setQuestionsIndex}
+      reset={reset}
+      setReset={setReset}
+      handleReset={handleReset}
+      mode={mode}
+      userAnswers={userAnswers}
+      addUserAnswer={addUserAnswer}
+      questionsIndex={questionsIndex}
+      timerOver={timerOver}
+      onStart={() => setReset(true)}
+      setTimerOver={setTimerOver}
+    />
+  }/>
+
+   <Route path='mock-lorry' element={
+    <MockMode
+    MOCK_QUESTIONS={MOCK_QUESTIONS}
+  type={type}
+    setType={setType}
+    restartQuiz={restartQuiz}
+      time={time}
+      vehicle={"lorry"}
       setTime={setTime}
       switchMode={switchMode}
       questionNo={questionNo}

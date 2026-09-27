@@ -5,6 +5,7 @@ Allow: /practice/
 Allow: /results/
 Allow: /mock-car
 Allow: /mock-bus
+Allow: /mock-lorry
 Disallow: /mock/
 Disallow: /private/
 Disallow: /admin/

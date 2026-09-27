@@ -6,7 +6,9 @@ import RightAnswer from "./right_answer";
 import WrongAnswer from "./wrong_answer";
 import { startTransition } from 'react';
 import { drivingTestQuestionsBus } from "./busquestions";
+import { drivingTestQuestionsLorry } from "./lorryquestions";
 import { BrowserRouter, Routes, useNavigate, Route } from "react-router-dom";
+import { Helmet } from "react-helmet";
 const PracticeMode = ({
   questionsIndex,
   addUserAnswer,
@@ -47,9 +49,7 @@ const PracticeMode = ({
   // else show wrong answer
   // add a next btn, that puts showAnswer as false and increment quesetion index
 
- useEffect(()=>{
-  console.log(questionsIndex,questionNo)
- },[questionNo,questionsIndex])
+ 
  
   useEffect(() => {
     if (questionNo === PRACTICE_QUESTIONS) {
@@ -63,26 +63,31 @@ const PracticeMode = ({
   }, [questionNo]);
 
   useEffect(()=>{ 
+       let selectedType = "bus";
        if (vehicle == "car")
         {
           setDrivingTestQuestions(drivingTestQuestionsCar);
+          selectedType = "car";
           setType("car");
            console.log(vehicle,type)
         }
-        else {
-          setDrivingTestQuestions(drivingTestQuestionsBus)
+       else if (vehicle == "bus") {
+          setDrivingTestQuestions(drivingTestQuestionsBus);
+          selectedType = "bus";
           setType("bus");
+        }
+       else if (vehicle == "lorry") {
+          setDrivingTestQuestions(drivingTestQuestionsLorry);
+          selectedType = "lorry";
+          setType("lorry");
         }
    restartQuiz()
    
-    switchMode("practice",type);
+    switchMode("practice",selectedType);
    handleReset()
 
   },[])
 
-  useEffect(()=>{
-    console.log(questionsIndex)
-  },[questionsIndex])
 
   const handleOptionChange = (questionNumber, optionKey) => {
     setSelectedOptions((prev) => ({
@@ -109,8 +114,30 @@ const PracticeMode = ({
    
     return false;
   };
+  const commonKeywords = [
+    "oral learner test",
+    "Mauritius driving test",
+  ];
+
+  const vehicleKeywords = type === "car"
+    ? ["car"]
+    : type === "bus"
+    ? ["mechanique", "mechanik", "bus"]
+    : type === "lorry"
+    ? ["mechanique", "mechanik", "lorry", "heavy vehicle", "learner camion", "oral camion", "lorry learner", "goods vehicle learner", "camion learner"]
+    : [];
+
+  const seoKeywords = [...commonKeywords, ...vehicleKeywords].join(", ");
+
+  const seoTitle = `Practice ${type.charAt(0).toUpperCase() + type.slice(1)} Driving Test - Mauritius`;
+
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={`Prepare for your ${type} driving test in Mauritius with our practice mode tests.`} />
+        <meta name="keywords" content={seoKeywords} />
+      </Helmet>
    {questionsIndex && questionsIndex.length > 0 ? (
     <section  className="min-h-[calc(100vh-90px)] flex justify-center flex-col  items-center  ">
       <div className="flex w-95/100 flex-col items-center  rounded-3xl md:max-w-2xl text-black bg-white py-2 ">

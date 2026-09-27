@@ -3,6 +3,7 @@ import Timer from "./timer";
 import ProgressBar from "./progressBar";
 import { drivingTestQuestionsCar } from './questions';
 import { drivingTestQuestionsBus } from "./busquestions";
+import { drivingTestQuestionsLorry } from "./lorryquestions";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes,useNavigate, Route } from "react-router-dom";
 import {Helmet} from "react-helmet"
@@ -33,19 +34,27 @@ const navigate = useNavigate();
   ///this component returns the question and has question index , all questions , setQuestionIndex, SetuserSelection,userSelection,userScore,
  
   useEffect(()=>{
+   let selectedType = "bus";
    if (vehicle == "car")
     {
       setDrivingTestQuestions(drivingTestQuestionsCar);
+      selectedType = "car";
       setType("car");
        console.log(vehicle,type)
     }
-    else {
-      setDrivingTestQuestions(drivingTestQuestionsBus)
+   else if (vehicle == "bus") {
+      setDrivingTestQuestions(drivingTestQuestionsBus);
+      selectedType = "bus";
       setType("bus");
+    }
+   else if (vehicle == "lorry") {
+      setDrivingTestQuestions(drivingTestQuestionsLorry);
+      selectedType = "lorry";
+      setType("lorry");
     }
    
 restartQuiz()
-    switchMode("mock",type);
+    switchMode("mock",selectedType);
    handleReset()
  
 
@@ -119,6 +128,8 @@ const handleNextQuestion = ()=>{
     ? ["car"]
     : type === "bus"
     ? ["mechanique", "mechanik", "bus"]
+    : type === "lorry"
+    ? ["mechanique", "mechanik", "lorry", "heavy vehicle", "learner camion", "oral camion", "lorry learner", "goods vehicle learner", "camion learner"]
     : [];
 
   const seoKeywords = [...commonKeywords, ...vehicleKeywords].join(", ");

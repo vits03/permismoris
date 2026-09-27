@@ -72,6 +72,10 @@ const HeroSection = ({ switchMode,restartQuiz }) => {
                 {" "}
                  Bus
               </button>
+                <button  onClick={()=>handleClick("practice","lorry")} className="px-4 py-2 bg-green-700 w-8/10 rounded-full hover:bg-green-600 transition-all ">
+                {" "}
+                 Lorry
+              </button>
             </div>
             <div className="md:w-3/10 w-95/100 min-h-45/100 text-black bg-red-100 text-center  md:h-8/10 py-3 md:py-8  gap-3  rounded-4xl flex flex-col justify-evenly items-center border-amber-700 border-2">
               <p className="text-lg text-amber-700">Mock Mode</p>
@@ -100,6 +104,10 @@ const HeroSection = ({ switchMode,restartQuiz }) => {
                 <button onClick={()=>handleClick("mock","bus")} className=" px-4 py-2 bg-amber-700 w-8/10 rounded-full hover:bg-amber-600 transition-all ">
                 {" "}
                 Bus
+              </button>
+                <button onClick={()=>handleClick("mock","lorry")} className=" px-4 py-2 bg-amber-700 w-8/10 rounded-full hover:bg-amber-600 transition-all ">
+                {" "}
+                Lorry
               </button>
             </div>
           </div>

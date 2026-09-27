@@ -1,17 +1,21 @@
-const RandomizeList = (questionListLength,finalListLength) => {
-  console.log(questionListLength,finalListLength)
-  // Create an array of indices from 0 to list.length - 1
-  const indices = Array.from({ length:questionListLength }, (_, i) => i);
+const RandomizeList = (questionListLength, finalListLength) => {
+  const maxIndex = questionListLength - 3;
 
-  // Fisher-Yates shuffle algorithm to shuffle the indices
+  if (maxIndex < finalListLength) {
+    throw new Error("Not enough elements to choose from after excluding last two indices.");
+  }
+
+  // Create array from 0 to questionListLength - 3 (excluded last 2)
+  const indices = Array.from({ length: maxIndex + 1 }, (_, i) => i);
+
+  // Fisher-Yates shuffle
   for (let i = indices.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i -2));
+    const j = Math.floor(Math.random() * (i + 1));
     [indices[i], indices[j]] = [indices[j], indices[i]];
   }
- // Return the shuffled indices array
-  const randomIndices = indices.slice(0, finalListLength);
-  return randomIndices;
 
+  // Return the first `finalListLength` random indices
+  return indices.slice(0, finalListLength);
 };
 
 export default RandomizeList;
