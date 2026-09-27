@@ -12,7 +12,11 @@ const HeroSection = ({ switchMode,restartQuiz }) => {
   const nextSectionRef = useRef(null);
 
   const handleScroll = () => {
-    nextSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (nextSectionRef.current) {
+      const yOffset = 80; // Scroll 80px further down past the top of the section
+      const y = nextSectionRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
   };
   return (
     <>
