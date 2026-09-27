@@ -61,7 +61,7 @@ const RightAnswer = ({ index,questionIndex,handleNextQuestion,drivingTestQuestio
             )
           }
         )}
-        <p className="text-sm text-green-700 font-bold text-center my-3">Explanation: <span className="text-green-700 font-normal">{drivingTestQuestions[questionIndex].explanation}</span></p>
+        <p className="text-sm text-green-700 font-bold text-center mt-6 mb-3">Explanation: <span className="text-green-700 font-normal">{drivingTestQuestions[questionIndex].explanation}</span></p>
       </div> 
         {nextBtn &&  <button
                 className="bg-amber-700 md:w-5/10 w-6/10 py-3 mt-3 text-lg rounded-4xl"

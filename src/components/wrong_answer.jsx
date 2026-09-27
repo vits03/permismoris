@@ -62,7 +62,7 @@ const WrongAnswer = ({questionIndex,handleNextQuestion,drivingTestQuestions,inde
                 );
               }
             )}
-                    <p className="text-sm text-red-700 mt-3 font-bold text-center">Explanation: <span className="text-red-700 font-normal">{drivingTestQuestions[questionIndex].explanation}</span></p>
+                    <p className="text-sm text-red-700 mt-6 font-bold text-center">Explanation: <span className="text-red-700 font-normal">{drivingTestQuestions[questionIndex].explanation}</span></p>
 
           </div>
           {nextBtn &&  <button
